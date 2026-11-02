@@ -1,0 +1,513 @@
+{
+  "hinweis": "Grundlagen und Schwellenwerte der LAGZERO-Auswertung. Änderbar; nach dem Speichern die Übersicht neu öffnen. Prozent-Bewertungen: gemessener Wert ÷ theoretischer/praktischer Höchstwert der Klasse.",
+  "version": 4,
+  "einordnung": {
+    "sehr_gut": 90,
+    "gut": 75,
+    "ausreichend": 50
+  },
+  "ampel": {
+    "sehr gut": "gruen",
+    "gut": "gruen",
+    "ausreichend": "gelb",
+    "schwach": "rot"
+  },
+  "laufwerke": {
+    "grundlage": "Sequenzielles Lesen/Schreiben im Verhältnis zur praktisch erreichbaren Datenrate der erkannten Schnittstelle (nicht des Geräts). NVMe-Werte gelten für 4 PCIe-Lanes und werden bei weniger Lanes anteilig verringert.",
+    "klassen": {
+      "usb1": {
+        "name": "USB 1.1",
+        "max_mb_s": 1.2,
+        "grundlage": "12 Mbit/s brutto, praktisch ≈ 1,2 MB/s"
+      },
+      "usb2": {
+        "name": "USB 2.0",
+        "max_mb_s": 42,
+        "grundlage": "480 Mbit/s brutto, praktisch ≈ 40–42 MB/s"
+      },
+      "usb3_5": {
+        "name": "USB 3.x 5 Gbit/s",
+        "max_mb_s": 450,
+        "grundlage": "5 Gbit/s brutto (8b/10b), praktisch ≈ 450 MB/s"
+      },
+      "usb3_10": {
+        "name": "USB 3.x 10 Gbit/s",
+        "max_mb_s": 1050,
+        "grundlage": "10 Gbit/s brutto (128b/132b), praktisch ≈ 1.050 MB/s"
+      },
+      "hdd": {
+        "name": "HDD (Festplatte)",
+        "max_mb_s": 250,
+        "grundlage": "schnelle 7.200-U/min-Festplatten erreichen außen ≈ 250 MB/s (mechanische Grenze)"
+      },
+      "sata": {
+        "name": "SATA-SSD",
+        "max_mb_s": 560,
+        "grundlage": "SATA 6 Gbit/s, praktisch ≈ 560 MB/s"
+      },
+      "nvme_gen3": {
+        "name": "NVMe PCIe Gen3",
+        "max_mb_s": 3500,
+        "grundlage": "PCIe 3.0 x4 = 3,94 GB/s, praktisch ≈ 3.500 MB/s"
+      },
+      "nvme_gen4": {
+        "name": "NVMe PCIe Gen4",
+        "max_mb_s": 7400,
+        "grundlage": "PCIe 4.0 x4 = 7,88 GB/s, praktisch ≈ 7.400 MB/s"
+      },
+      "nvme_gen5": {
+        "name": "NVMe PCIe Gen5",
+        "max_mb_s": 14500,
+        "grundlage": "PCIe 5.0 x4 = 15,75 GB/s, praktisch ≈ 14.500 MB/s"
+      }
+    }
+  },
+  "ram": {
+    "grundlage": "Theoretische Bandbreite = Kanäle × eingestellter Takt (MT/s) × 8 Byte. Kopieren liest und schreibt jedes Byte, deshalb zählt dort die doppelte Datenmenge.",
+    "kopieren_faktor": 2
+  },
+  "gpu": {
+    "grundlage": "Gemessene FP32-Rechenleistung (Compute-Test) ÷ theoretische Spitzenleistung laut Hersteller = Shader × 2 × offizieller Boost-Takt. Werte leicht über 100 % sind normal: Die Karte taktet im Betrieb oft höher als der Herstellerwert (GPU Boost). Erkannt wird der Kartenname Wort für Wort (längste Namen zuerst), Varianten zusätzlich über den Grafikspeicher. Laptop-Varianten (Laptop, Mobile, Max-Q oder Notebook-Gehäuse) sind nicht bewertbar, weil ihre Leistung vom Gerät abhängt. Nicht aufgeführte Karten sind nicht bewertbar – Einträge können hier ergänzt werden.",
+    "karten": [
+      {
+        "name": "RTX 5090",
+        "tflops_fp32": 104.75,
+        "shader": 21760,
+        "boost_takt_laut_hersteller_mhz": 2407,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 5080",
+        "tflops_fp32": 56.28,
+        "shader": 10752,
+        "boost_takt_laut_hersteller_mhz": 2617,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 5070 Ti",
+        "tflops_fp32": 43.94,
+        "shader": 8960,
+        "boost_takt_laut_hersteller_mhz": 2452,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 5070",
+        "tflops_fp32": 30.87,
+        "shader": 6144,
+        "boost_takt_laut_hersteller_mhz": 2512,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4090",
+        "tflops_fp32": 82.58,
+        "shader": 16384,
+        "boost_takt_laut_hersteller_mhz": 2520,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4080 SUPER",
+        "tflops_fp32": 52.22,
+        "shader": 10240,
+        "boost_takt_laut_hersteller_mhz": 2550,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4080",
+        "tflops_fp32": 48.74,
+        "shader": 9728,
+        "boost_takt_laut_hersteller_mhz": 2505,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4070 Ti SUPER",
+        "tflops_fp32": 44.1,
+        "shader": 8448,
+        "boost_takt_laut_hersteller_mhz": 2610,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4070 Ti",
+        "tflops_fp32": 40.09,
+        "shader": 7680,
+        "boost_takt_laut_hersteller_mhz": 2610,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4070 SUPER",
+        "tflops_fp32": 35.48,
+        "shader": 7168,
+        "boost_takt_laut_hersteller_mhz": 2475,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4070",
+        "tflops_fp32": 29.15,
+        "shader": 5888,
+        "boost_takt_laut_hersteller_mhz": 2475,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4060 Ti",
+        "tflops_fp32": 22.06,
+        "shader": 4352,
+        "boost_takt_laut_hersteller_mhz": 2535,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 4060",
+        "tflops_fp32": 15.11,
+        "shader": 3072,
+        "boost_takt_laut_hersteller_mhz": 2460,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3090 Ti",
+        "tflops_fp32": 40,
+        "shader": 10752,
+        "boost_takt_laut_hersteller_mhz": 1860,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3090",
+        "tflops_fp32": 35.58,
+        "shader": 10496,
+        "boost_takt_laut_hersteller_mhz": 1695,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3080 Ti",
+        "tflops_fp32": 34.1,
+        "shader": 10240,
+        "boost_takt_laut_hersteller_mhz": 1665,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3080",
+        "tflops_fp32": 29.77,
+        "shader": 8704,
+        "boost_takt_laut_hersteller_mhz": 1710,
+        "vram_min_gb": null,
+        "vram_max_gb": 11,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": "nur 10-GB-Version (die 12-GB-Version hat 8.960 Shader)"
+      },
+      {
+        "name": "RTX 3070 Ti",
+        "tflops_fp32": 21.75,
+        "shader": 6144,
+        "boost_takt_laut_hersteller_mhz": 1770,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3070",
+        "tflops_fp32": 20.31,
+        "shader": 5888,
+        "boost_takt_laut_hersteller_mhz": 1725,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3060 Ti",
+        "tflops_fp32": 16.2,
+        "shader": 4864,
+        "boost_takt_laut_hersteller_mhz": 1665,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 3060",
+        "tflops_fp32": 12.74,
+        "shader": 3584,
+        "boost_takt_laut_hersteller_mhz": 1777,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA Produktseite / Datenblatt",
+        "hinweis": null
+      },
+      {
+        "name": "TITAN RTX",
+        "tflops_fp32": 16.31,
+        "shader": 4608,
+        "boost_takt_laut_hersteller_mhz": 1770,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "NVIDIA TITAN-RTX-Produktseite und Datenblatt (16,3 TFLOPS)",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2080 Ti",
+        "tflops_fp32": 13.45,
+        "shader": 4352,
+        "boost_takt_laut_hersteller_mhz": 1545,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost) – Founders Edition: 1.635 MHz",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2080 SUPER",
+        "tflops_fp32": 11.15,
+        "shader": 3072,
+        "boost_takt_laut_hersteller_mhz": 1815,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2080",
+        "tflops_fp32": 10.07,
+        "shader": 2944,
+        "boost_takt_laut_hersteller_mhz": 1710,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp: Shader und Referenz-Boost; TFLOPS = Shader × 2 × Boost berechnet – Founders Edition: 1.800 MHz",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2070 SUPER",
+        "tflops_fp32": 9.06,
+        "shader": 2560,
+        "boost_takt_laut_hersteller_mhz": 1770,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2070",
+        "tflops_fp32": 7.46,
+        "shader": 2304,
+        "boost_takt_laut_hersteller_mhz": 1620,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost) – Founders Edition: 1.710 MHz",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2060 SUPER",
+        "tflops_fp32": 7.18,
+        "shader": 2176,
+        "boost_takt_laut_hersteller_mhz": 1650,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "RTX 2060",
+        "tflops_fp32": 6.45,
+        "shader": 1920,
+        "boost_takt_laut_hersteller_mhz": 1680,
+        "vram_min_gb": null,
+        "vram_max_gb": 7,
+        "quelle": "TechPowerUp: Shader und Referenz-Boost; TFLOPS = Shader × 2 × Boost berechnet",
+        "hinweis": "nur 6-GB-Version (die 12-GB-Version hat 2.176 Shader)"
+      },
+      {
+        "name": "GTX 1080 Ti",
+        "tflops_fp32": 11.34,
+        "shader": 3584,
+        "boost_takt_laut_hersteller_mhz": 1582,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "GTX 1080",
+        "tflops_fp32": 8.87,
+        "shader": 2560,
+        "boost_takt_laut_hersteller_mhz": 1733,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp: Shader und Referenz-Boost; TFLOPS = Shader × 2 × Boost berechnet",
+        "hinweis": null
+      },
+      {
+        "name": "GTX 1070 Ti",
+        "tflops_fp32": 8.19,
+        "shader": 2432,
+        "boost_takt_laut_hersteller_mhz": 1683,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "GTX 1070",
+        "tflops_fp32": 6.46,
+        "shader": 1920,
+        "boost_takt_laut_hersteller_mhz": 1683,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp: Shader und Referenz-Boost; TFLOPS = Shader × 2 × Boost berechnet",
+        "hinweis": null
+      },
+      {
+        "name": "GTX 1060",
+        "tflops_fp32": 4.37,
+        "shader": 1280,
+        "boost_takt_laut_hersteller_mhz": 1708,
+        "vram_min_gb": 5.5,
+        "vram_max_gb": 7,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost) (6-GB-Version)",
+        "hinweis": "6-GB-Version, erkannt über den Grafikspeicher"
+      },
+      {
+        "name": "GTX 1060",
+        "tflops_fp32": 3.94,
+        "shader": 1152,
+        "boost_takt_laut_hersteller_mhz": 1708,
+        "vram_min_gb": null,
+        "vram_max_gb": 3.5,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost) (3-GB-Version)",
+        "hinweis": "3-GB-Version, erkannt über den Grafikspeicher"
+      },
+      {
+        "name": "GTX 1050 Ti",
+        "tflops_fp32": 2.14,
+        "shader": 768,
+        "boost_takt_laut_hersteller_mhz": 1392,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost)",
+        "hinweis": null
+      },
+      {
+        "name": "GTX 1050",
+        "tflops_fp32": 1.86,
+        "shader": 640,
+        "boost_takt_laut_hersteller_mhz": 1455,
+        "vram_min_gb": null,
+        "vram_max_gb": 2.5,
+        "quelle": "TechPowerUp: Shader und Referenz-Boost; TFLOPS = Shader × 2 × Boost berechnet (2-GB-Version)",
+        "hinweis": "2-GB-Version (die 3-GB-Version hat 768 Shader)"
+      },
+      {
+        "name": "GT 1030",
+        "tflops_fp32": 1.13,
+        "shader": 384,
+        "boost_takt_laut_hersteller_mhz": 1468,
+        "vram_min_gb": null,
+        "vram_max_gb": null,
+        "quelle": "TechPowerUp GPU Database (Referenz-Boost) (GDDR5-Version)",
+        "hinweis": "Die DDR4-Version heißt gleich, taktet aber niedriger (1.379 MHz Boost) und ist nicht unterscheidbar – dort fällt der Prozentwert niedriger aus."
+      }
+    ]
+  },
+  "frametime": {
+    "grundlage": "1 % Low (FPS der langsamsten 1 % aller Bilder) im Verhältnis zur echten Bildwiederholrate des Hauptmonitors. „Flüssig bis X Hz“ = höchste Monitorstufe, die das 1 % Low noch erreicht. Gilt für die Testszene, nicht für jedes Spiel.",
+    "monitor_stufen_hz": [
+      60,
+      120,
+      144,
+      240,
+      360
+    ],
+    "anteil_bildwiederholrate_prozent": {
+      "sehr_gut": 95,
+      "gut": 75,
+      "ausreichend": 50
+    },
+    "ruckler_prozent_gelb": 0.1,
+    "ruckler_prozent_rot": 1
+  },
+  "controller": {
+    "grundlage": "Polling-Rate (Median) eingeordnet in USB-Polling-Klassen; Gleichmäßigkeit = Jitter (Standardabweichung der Paketabstände) absolut in ms; Drift = größte Stick-Auslenkung in Ruhe in % des Wegs.",
+    "klassen_hz": [
+      125,
+      250,
+      500,
+      1000,
+      2000,
+      4000,
+      8000
+    ],
+    "sehr_gut_ab_hz": 1000,
+    "gut_ab_hz": 500,
+    "ausreichend_ab_hz": 250,
+    "jitter_sehr_gut_bis_ms": 0.1,
+    "jitter_gut_bis_ms": 0.25,
+    "jitter_ausreichend_bis_ms": 0.5,
+    "drift_kein_bis_prozent": 2,
+    "drift_leicht_bis_prozent": 5,
+    "drift_deutlich_bis_prozent": 10
+  },
+  "cpu": {
+    "grundlage": "Ohne Vergleichsdatenbank ist kein Vergleich mit anderen PCs möglich. Bewertet wird: Kernauslastung = (Mehrkern ÷ Einzelkern) ÷ Anzahl physischer Kerne (Ganzzahl und Fließkomma), Stabilität = größte Abweichung der letzten Läufe dieses Prozessors vom Mittelwert, und die Veränderung gegenüber dem vorherigen Lauf aus dem Verlauf.",
+    "kernauslastung_prozent": {
+      "sehr_gut": 85,
+      "gut": 70,
+      "ausreichend": 50
+    },
+    "stabil_bis_prozent": 3,
+    "leicht_schwankend_bis_prozent": 7,
+    "stabilitaet_laeufe": 5,
+    "veraenderung_hinweis_ab_prozent": 5
+  },
+  "internet": {
+    "grundlage": "Bufferbloat-Note aus dem Anstieg des Pings unter Last gegenüber dem Ruhezustand (Median, jeweils der schlechtere Wert von Download- und Upload-Last). Gemessen mit M-Lab NDT7, Ping über eine eigene kleine Verbindung zum Messserver. Download und Upload werden nicht bewertet: die gebuchte Geschwindigkeit ist dem Programm nicht bekannt.",
+    "a_plus_unter_ms": 5,
+    "a_unter_ms": 30,
+    "b_unter_ms": 60,
+    "c_unter_ms": 200,
+    "d_unter_ms": 400,
+    "quelle": "M-Lab NDT7 (measurementlab.net), Protokoll: github.com/m-lab/ndt-server/blob/main/spec/ndt7-protocol.md"
+  }
+}

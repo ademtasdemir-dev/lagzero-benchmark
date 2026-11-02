@@ -1,0 +1,24 @@
+# build output – the exe is shipped as a release file, never in the repository
+publish/
+bin/
+obj/
+release/
+*.exe
+*.zip
+
+# local data written by the program
+Logs/
+Verlauf/
+Berichte/
+LAGZERO_Benchmark_Temp/
+
+# all JSON except the evaluation rules
+*.json
+!bewertung.json
+
+# IDE / OS
+.vs/
+.vscode/
+*.user
+*.suo
+Thumbs.db
